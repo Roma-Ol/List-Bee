@@ -12,7 +12,7 @@ const ListCard = () => {
     const [todo, setTodo] = useState([
     ]);
 
-    const addTodo = (newTodo) => {
+    const updateTodoList = (newTodo) => {
         setTodo((todo) => newTodo);
     }
 
@@ -45,11 +45,13 @@ const ListCard = () => {
             </div>
 
             <div className="list__card__content">
-                <CardContent todos={todo} />
+                <CardContent currentState={todo}
+                             updateTodoList={updateTodoList}/>
             </div>
 
             <div className="list__card__add-todo">
-                <AddTodo currentState={todo} addTodo={addTodo}/>
+                <AddTodo currentState={todo}
+                         updateTodoList={updateTodoList}/>
             </div>
         </div>
     )

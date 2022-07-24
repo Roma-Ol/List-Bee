@@ -16,7 +16,7 @@ const AddTodo = (props) => {
             }
 
             // Change state
-            props.addTodo([...props.currentState, newTodo]);
+            props.updateTodoList([...props.currentState, newTodo]);
 
             // And clear the field.
             document.querySelector(".todo__add")
