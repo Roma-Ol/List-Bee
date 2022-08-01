@@ -11,9 +11,7 @@ const CardContent = (props) => {
             .querySelector('input')
             .value;
 
-        const newState = todo.filter(i => i.title !== inputVal);
-
-        props.updateTodoList(newState);
+        props.updateTodoList(todo.filter(i => i.title !== inputVal));
     }
 
     return (
