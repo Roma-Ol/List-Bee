@@ -1,7 +1,7 @@
 import {Button, TextField} from "@mui/material";
 import {useState} from "react";
 
-const AddTodo = (props) => {
+const AddTodo = ({updateTodoList, currentState}) => {
 
     const [todo, setTodo] = useState('');
 
@@ -9,14 +9,14 @@ const AddTodo = (props) => {
     const addTodo = () => {
         if (todo !== '') {
             const newTodo = {
-                uid: props.currentState.length + 1,
+                uid: currentState.length + 1,
+                key: currentState.length + 1,
                 title: todo,
-                description: '',
-                active: true
+                isActive: true
             }
 
             // Change state
-            props.updateTodoList([...props.currentState, newTodo]);
+            updateTodoList([...currentState, newTodo]);
 
             // And clear the field.
             document.querySelector(".todo__add")
@@ -42,7 +42,7 @@ const AddTodo = (props) => {
     }
 
     return(
-        <>
+        <div className='add-todo'>
             <TextField id="standard-basic"
                        val="Standard"
                        variant="standard"
@@ -52,7 +52,7 @@ const AddTodo = (props) => {
 
             <Button variant="outlined"
                     onClick={addTodo}>+</Button>
-        </>
+        </div>
     )
 }
 

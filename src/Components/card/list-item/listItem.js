@@ -1,8 +1,17 @@
 import React, {useRef} from 'react'
 import {useDrag, useDrop} from 'react-dnd'
 
+const cardStyle = {
+    border: '1px solid cyan',
+    display: 'flex',
+    maxWidth: '748px',
+    justifyContent: 'space-between',
+    background: 'white',
+    marginBottom: '15px',
+    cursor: 'move',
+}
 
-const ListItem = ({title, index, moveListItem}) => {
+const ListItem = ({title, index, identifier, moveListItem, makeInactive}) => {
 
     // useDrag - the list item is draggable
     const [{isDragging}, dragRef] = useDrag({
@@ -33,14 +42,30 @@ const ListItem = ({title, index, moveListItem}) => {
         },
     })
 
+    const handleClick = () => {
+        makeInactive(identifier);
+    }
+
     // Join the 2 refs together into one (both draggable and can be dropped on)
-    const ref = useRef(null)
-    const dragDropRef = dragRef(dropRef(ref))
+    const ref = useRef(null),
+        dragDropRef = dragRef(dropRef(ref))
 
     return (
-        <div ref={dragDropRef} className="todoUnit">
-            {title}
-        </div>
+        <li className='todo-list__item'
+            ref={dragDropRef}
+            style={cardStyle}>
+
+            <div className="todo-list__item__title">
+                {title}
+            </div>
+
+            <button className='todo-list__item__delete'
+                    onClick={handleClick}
+                    value="Done">
+                Done
+            </button>
+        </li>
+
     )
 }
 

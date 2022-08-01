@@ -2,8 +2,8 @@ import {TextField} from "@mui/material";
 
 const ListHeader = () => {
     return (
-        <div className='list__description'>
-            <div className='list__description--primary'>
+        <div className='card__header'>
+            <div className='card__header--primary'>
                 <TextField id="standard-basic"
                            label="Title"
                            variant="standard"
@@ -11,7 +11,7 @@ const ListHeader = () => {
                             value="Lorem Ipsum"/>
             </div>
 
-            <div className='list__description--secondary'>
+            <div className='card__header--secondary'>
                 <TextField id="standard-basic"
                            label="Description"
                            variant="standard"

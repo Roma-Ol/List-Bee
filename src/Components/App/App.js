@@ -1,13 +1,14 @@
 import './App.css';
-import '../list-header/list-header'
 import ListHeader from "../list-header/list-header";
-import ListCard from "../card/card";
+import ListCard from "../card/card-wrapper/card";
 
 function App() {
   return (
     <div className="App">
-        <ListHeader />
-        <ListCard />
+        <div className="card">
+            <ListHeader />
+            <ListCard />
+        </div>
     </div>
   );
 }
