@@ -1,6 +1,3 @@
-import React, {useRef} from 'react'
-import {useDrag, useDrop} from 'react-dnd'
-
 const cardStyle = {
     border: '1px solid cyan',
     display: 'flex',
@@ -11,59 +8,28 @@ const cardStyle = {
     cursor: 'move',
 }
 
-const ListItem = ({title, index, identifier, moveListItem, makeInactive}) => {
-
-    // useDrag - the list item is draggable
-    const [{isDragging}, dragRef] = useDrag({
-        type: 'item',
-        item: {index},
-        collect: (monitor) => ({
-            isDragging: monitor.isDragging(),
-        }),
-    })
-
-    // useDrop - the list item is also a drop area
-    const [spec, dropRef] = useDrop({
-        accept: 'item',
-        hover: (item, monitor) => {
-            const dragIndex = item.index
-            const hoverIndex = index
-            const hoverBoundingRect = ref.current?.getBoundingClientRect()
-            const hoverMiddleY = (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2
-            const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top
-
-            // if dragging down, continue only when hover is smaller than middle Y
-            if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return
-            // if dragging up, continue only when hover is bigger than middle Y
-            if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return
-
-            moveListItem(dragIndex, hoverIndex)
-            item.index = hoverIndex
-        },
-    })
-
-    const handleClick = () => {
-        makeInactive(identifier);
+const ListItem = ({title, identifier, isActive, setStatus, makeInactive}) => {
+    const handleClick = (e) => {
+        const action = e.target.getAttribute('value');
+        setStatus(action);
     }
-
-    // Join the 2 refs together into one (both draggable and can be dropped on)
-    const ref = useRef(null),
-        dragDropRef = dragRef(dropRef(ref))
 
     return (
         <li className='todo-list__item'
-            ref={dragDropRef}
             style={cardStyle}>
 
             <div className="todo-list__item__title">
                 {title}
             </div>
 
-            <button className='todo-list__item__delete'
-                    onClick={handleClick}
-                    value="Done">
-                Done
-            </button>
+            <div className="todo-list__item_cta">
+                {isActive
+                    ? <button className='todo-list__item__done'  onClick={handleClick} value="done">Done</button>
+                    : <button className='todo-list__item__redo'  onClick={handleClick} value="redo">Redo</button>
+                }
+
+                <button className='todo-list__item__delete' onClick={handleClick} value="remove"> Remove</button>
+            </div>
         </li>
 
     )

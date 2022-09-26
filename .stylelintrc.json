@@ -1,0 +1,18 @@
+{
+  "extends": "stylelint-config-recommended-scss",
+  "rules": {
+    "color-no-invalid-hex": true,
+    "max-nesting-depth": 4,
+    "selector-no-qualifying-type": null,
+    "selector-max-compound-selectors": 4,
+    "selector-class-pattern": null,
+    "string-no-newline": true,
+    "declaration-no-important": true,
+    "font-weight-notation": "numeric",
+    "length-zero-no-unit": true,
+    "no-invalid-position-at-import-rule": null,
+    "no-descending-specificity": null,
+    "no-duplicate-selectors": null
+  }
+}
+
