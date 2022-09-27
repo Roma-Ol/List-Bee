@@ -8,10 +8,10 @@ const cardStyle = {
     cursor: 'move',
 }
 
-const ListItem = ({title, identifier, isActive, setStatus, makeInactive}) => {
+const ListItem = ({title, id, isActive, setStatus, makeInactive}) => {
     const handleClick = (e) => {
         const action = e.target.getAttribute('value');
-        setStatus(action);
+        setStatus(action, id);
     }
 
     return (
